@@ -1,0 +1,25 @@
+[Unit]
+Description=MAGI System Metrics Service
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+User=magi
+Group=docker
+EnvironmentFile=/etc/magi/env
+ExecStart=/usr/local/bin/magi
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/proc /sys
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
