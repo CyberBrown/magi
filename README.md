@@ -151,11 +151,11 @@ The Docker collector has a built-in registry of known services with types and VR
 
 ## Project Status
 
-**Functional but pre-release.** No git commits yet — all files are staged in the index. Key observations:
+**Functional, deployed on prometheus (`magi.service`, port 8780).**
 
 - **Built and working:** CPU, memory, disk, GPU (including unified memory fallback), Docker collectors, HTTP API with auth, CORS, background caching collector, systemd unit, Makefile with cross-compile.
-- **Types refactor in progress:** `api/types.go` was deleted from the working tree and types were moved to a new `types/types.go` package. The working tree reflects this refactor but `git add` has not been run to update the index.
-- **No tests found:** No `_test.go` files exist yet, though `make test` is wired up.
+- **Entrypoint:** `cmd/magi/main.go`. Until 2026-10-20 it was missing from git because the `.gitignore` entry `magi` (meant for the built binary) also matched the `cmd/magi/` directory, so a fresh clone could not build. The ignore rules are now anchored (`/magi`, `/magi-arm64`).
+- **No tests yet:** no `_test.go` files exist, though `make test` is wired up.
 - **No external dependencies:** `go.mod` has zero third-party imports — everything uses the standard library.
 
 ## License
